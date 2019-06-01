@@ -59,6 +59,13 @@ const publishResult = (player, ai, result) => {
   }
 }
 
+//function ending each round (reset player and ai choice)
+function resetGame() {
+  document.querySelector(`[data-option = '${game.playerHand}']`).style.boxShadow = '';
+  game.playerHand = '';
+  game.aiHand = '';
+}
+
 //steering function 
 const startGame = function () {
   if (!game.playerHand) return alert('take your pick')
@@ -66,7 +73,9 @@ const startGame = function () {
   const gameResult = checkResult(game.playerHand, game.aiHand)
   console.log(gameResult)
   publishResult(game.playerHand, game.aiHand, gameResult)
+  resetGame()
 }
+
 hands.forEach(hand => hand.addEventListener('click', handSelection))
 
 document.querySelector('.start').addEventListener('click', startGame);
